@@ -1,9 +1,13 @@
 const express = require('express');
-const app = express();
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-app.get('/', (req, res) => {
-	res.send({ hi: 'there' });
-});
+const app = express();
+passport.use(new GoogleStrategy());
+
+// app.get('/', (req, res) => {
+// 	res.send({ hi: 'there' });
+// });
 
 //Heroku configuration for production enviroment
 const PORT = process.env.PORT || 5000;
