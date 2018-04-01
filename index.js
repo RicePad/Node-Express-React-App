@@ -37,7 +37,9 @@ passport.use(
 	  })
 	);
 
-	app.get('/auth/google', passport.authenticate('google'));
+	app.get('/auth/google/callback', passport.authenticate('google'));
+
+
 
 
 //Heroku configuration for production enviroment
