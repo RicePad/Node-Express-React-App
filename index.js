@@ -7,19 +7,25 @@ const keys = require('./config/keys');
 
 const app = express();
 
-passport.use(new GoogleStrategy(
-		{
-			clientID: keys.googleClientID,
-			clientSecret: keys.googleClientSecret,
-			callbackURL: '/auth/google/callback'
-
-		},
-		accessToken => {
-			console.log(accessToken);
-		}
-	)
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: '/auth/google/callback'
+    },
+    accessToken => {
+      console.log(accessToken);
+    }
+  )
 );
 
+app.get(
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email']
+  })
+);
 // app.get('/', (req, res) => {
 // 	res.send({ hi: 'there' });
 // });
