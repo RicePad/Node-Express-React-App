@@ -14,18 +14,22 @@ passport.use(
       clientSecret: keys.googleClientSecret,
       callbackURL: '/auth/google/callback'
     },
-    accessToken => {
-      console.log(accessToken);
+    (accessToken, refreshToken, profile, done ) => {
+      console.log('accessToken', accessToken);
+      console.log('refreshToken', refreshToken);
+      console.log('profile', profile);
     }
   )
 );
 
 
-// app.get('/', (req, res) => {
-// 	res.send({ hi: 'there' });
-// });
+
 
 //Route Handlers
+	// app.get('/', (req, res) => {
+	// 	res.send({ hi: 'there' });
+	// });
+	
 	app.get(
 	  '/auth/google',
 	  passport.authenticate('google', {
