@@ -20,15 +20,21 @@ passport.use(
   )
 );
 
-app.get(
-  '/auth/google',
-  passport.authenticate('google', {
-    scope: ['profile', 'email']
-  })
-);
+
 // app.get('/', (req, res) => {
 // 	res.send({ hi: 'there' });
 // });
+
+//Route Handlers
+	app.get(
+	  '/auth/google',
+	  passport.authenticate('google', {
+	    scope: ['profile', 'email']
+	  })
+	);
+
+	app.get('/auth/google', passport.authenticate('google'));
+
 
 //Heroku configuration for production enviroment
 const PORT = process.env.PORT || 5000;
