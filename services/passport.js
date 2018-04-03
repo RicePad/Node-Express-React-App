@@ -5,6 +5,10 @@ const keys = require('../config/keys');
 
 const User = mongoose.model('users');
 
+passport.serializeUser((user, model) => {
+	done(null, user.id);
+});
+
 
 passport.use(
   new GoogleStrategy(
@@ -18,13 +22,13 @@ passport.use(
       .then(existingUser => {
       	if(existingUser){
       		// we already have a record with the given profile ID
-      		done(null, existingUser);
+          done(null, existingUser);
       	}else{
       		// we don't have a user record with this ID, make a new record
 
-      		new User({ googleId: profile.id }).save()
-      		.then(user => done(null, user));
-
+      		 new User({ googleId: profile.id })
+            .save()
+            .then(user => done(null, user));
       	}
       })
 
